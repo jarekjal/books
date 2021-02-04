@@ -11,13 +11,16 @@ public class AuthorModel {
     @NotBlank(message = "Author's surname must not be empty!")
     private String surname;
 
-    AuthorModel(String name, String surname){
+    private String bookTitle;
+
+    AuthorModel(String name, String surname, String bookTitle){
         this.name = name;
         this.surname = surname;
+        this.bookTitle = bookTitle;
     }
 
     public static AuthorModel fromAuthor(Author author) {
-        return new AuthorModel(author.getName(), author.getSurname());
+        return new AuthorModel(author.getName(), author.getSurname(), author.getBook().getTitle());
     }
 
     public String getName() {
@@ -34,5 +37,13 @@ public class AuthorModel {
 
     public void setSurname(String surname) {
         this.surname = surname;
+    }
+
+    public String getBookTitle() {
+        return bookTitle;
+    }
+
+    public void setBookTitle(String bookTitle) {
+        this.bookTitle = bookTitle;
     }
 }

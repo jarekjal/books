@@ -17,7 +17,7 @@ public class Author {
     @Column(name = "surname")
     private String surname;
 
-    @OneToOne(mappedBy = "author")
+    @OneToOne(mappedBy = "author") // nazwa pola w klasie Book
     private Book book;
 
     public Integer getId() {

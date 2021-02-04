@@ -20,7 +20,7 @@ public class AuthorController {
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<?> readAuthors(){
         return ResponseEntity.ok(
-                authorRepository.findDistinctAuthors().stream().map(AuthorModel::fromAuthor).collect(Collectors.toList())
+                authorRepository.findAll().stream().map(AuthorModel::fromAuthor).collect(Collectors.toList())
         );
     }
 
