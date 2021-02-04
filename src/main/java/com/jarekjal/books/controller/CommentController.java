@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 public class CommentController {
@@ -22,9 +23,8 @@ public class CommentController {
     private PostRepository postRepository;
 
     @GetMapping("/posts/{postId}/comments")
-    public Page<Comment> getAllCommentsByPostId(@PathVariable(value = "postId") Integer postId,
-                                                Pageable pageable) {
-        return commentRepository.findByPostId(postId, pageable);
+    public List<Comment> getAllCommentsByPostId(@PathVariable(value = "postId") Integer postId) {
+        return commentRepository.findByPostId(postId);
     }
 
     @PostMapping("/posts/{postId}/comments")

@@ -4,8 +4,6 @@ import com.jarekjal.books.entity.Post;
 import com.jarekjal.books.exception.ResourceNotFoundException;
 import com.jarekjal.books.repository.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
