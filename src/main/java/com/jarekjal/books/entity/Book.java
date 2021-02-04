@@ -14,10 +14,9 @@ public class Book {
     @Column(name = "title")
     private String title;
 
-    @ManyToOne
-    @JoinColumn(name="author_id", nullable=false)
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "author_id", nullable = false)
     private Author author;
-
 
 
     public Integer getId() {
@@ -42,5 +41,14 @@ public class Book {
 
     public void setAuthor(Author author) {
         this.author = author;
+    }
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", author=" + author +
+                '}';
     }
 }

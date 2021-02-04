@@ -1,7 +1,6 @@
 package com.jarekjal.books.entity;
 
 import javax.persistence.*;
-import java.util.Set;
 
 @Entity
 @Table(name = "authors")
@@ -17,9 +16,6 @@ public class Author {
 
     @Column(name = "surname")
     private String surname;
-
-    @OneToMany(mappedBy="author")
-    private Set<Book> books;
 
     public Integer getId() {
         return id;
@@ -45,11 +41,12 @@ public class Author {
         this.surname = surname;
     }
 
-    public Set<Book> getBooks() {
-        return books;
-    }
-
-    public void setBooks(Set<Book> books) {
-        this.books = books;
+    @Override
+    public String toString() {
+        return "Author{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                '}';
     }
 }
