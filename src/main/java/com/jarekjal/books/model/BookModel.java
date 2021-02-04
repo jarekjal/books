@@ -6,6 +6,8 @@ import com.jarekjal.books.entity.Book;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.util.HashSet;
+import java.util.Set;
 
 public class BookModel {
 
@@ -27,7 +29,9 @@ public class BookModel {
         author.setName(bookModel.getAuthor().getName());
         author.setSurname(bookModel.getAuthor().getSurname());
         book.setAuthor(author);
-        author.setBook(book);
+        Set<Book> books = new HashSet<>();
+        books.add(book);
+        author.setBooks(books);
         return book;
     }
 

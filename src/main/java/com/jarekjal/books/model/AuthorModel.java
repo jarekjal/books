@@ -1,8 +1,11 @@
 package com.jarekjal.books.model;
 
 import com.jarekjal.books.entity.Author;
+import com.jarekjal.books.entity.Book;
 
 import javax.validation.constraints.NotBlank;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class AuthorModel {
 
@@ -11,16 +14,18 @@ public class AuthorModel {
     @NotBlank(message = "Author's surname must not be empty!")
     private String surname;
 
-    private String bookTitle;
+    private Set<String> bookTitles;
 
-    AuthorModel(String name, String surname, String bookTitle){
+    AuthorModel(String name, String surname, Set<String> bookTitles){
         this.name = name;
         this.surname = surname;
-        this.bookTitle = bookTitle;
+        this.bookTitles = bookTitles;
     }
 
     public static AuthorModel fromAuthor(Author author) {
-        return new AuthorModel(author.getName(), author.getSurname(), author.getBook().getTitle());
+        Set<Book> books = author.getBooks();
+        Set<String> titles = books.stream().map(book -> book.getTitle()).collect(Collectors.toSet());
+        return new AuthorModel(author.getName(), author.getSurname(), titles);
     }
 
     public String getName() {
@@ -39,11 +44,11 @@ public class AuthorModel {
         this.surname = surname;
     }
 
-    public String getBookTitle() {
-        return bookTitle;
+    public Set<String> getBookTitles() {
+        return bookTitles;
     }
 
-    public void setBookTitle(String bookTitle) {
-        this.bookTitle = bookTitle;
+    public void setBookTitles(Set<String> bookTitles) {
+        this.bookTitles = bookTitles;
     }
 }
