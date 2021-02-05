@@ -1,6 +1,9 @@
 package com.jarekjal.books.entity;
 
+import com.jarekjal.books.model.Author;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "books")
@@ -8,23 +11,36 @@ public class Book {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private Integer id;
 
-    @Column(name = "title")
+    @Column(nullable = false, name = "title")
+    @NotNull
     private String title;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "author_id", nullable = false)
+    @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(
+                    name = "name",
+                    column = @Column(nullable = false, name = "author_name")
+            ),
+            @AttributeOverride(
+                    name = "surname",
+                    column = @Column(nullable = false, name = "author_surname")
+            )
+    })
+    @NotNull
     private Author author;
 
+    public Book() {
+    }
+
+    public Book(@NotNull String title, @NotNull Author author) {
+        this.title = title;
+        this.author = author;
+    }
 
     public Integer getId() {
         return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public String getTitle() {
@@ -41,14 +57,5 @@ public class Book {
 
     public void setAuthor(Author author) {
         this.author = author;
-    }
-
-    @Override
-    public String toString() {
-        return "Book{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", author=" + author +
-                '}';
     }
 }
