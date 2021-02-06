@@ -1,0 +1,1 @@
+alter table books add column created_on timestamp null;

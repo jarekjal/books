@@ -7,7 +7,7 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "books")
-public class Book {
+public class Book extends AuditData{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -58,4 +58,5 @@ public class Book {
     public void setAuthor(Author author) {
         this.author = author;
     }
+
 }
